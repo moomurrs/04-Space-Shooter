@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+
 export var speed = 500
 onready var Explosion = load("res://Scene/Explosion.tscn")
 onready var Player = get_node("/root/Games/Player")
@@ -10,6 +11,9 @@ func _ready():
 	# bullets may collide many objects simultaneously
 	# constrain bullets to only report, at most, 4 simultaneously collisions 
 	set_max_contacts_reported(4)
+	
+	var player = $Sound
+	player.play()
 
 func _physics_process(delta):
 	# get a list of bodies that collided with bullet
