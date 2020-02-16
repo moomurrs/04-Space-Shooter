@@ -3,8 +3,8 @@ extends KinematicBody2D
 export var health = 100
 export var score = 0
 export var margin = 5
-export var y_range = 400
-export var acceleration = 0.1
+export var y_range = 500
+export var acceleration = 0.2
 
 # get the dimensions of the window for calculations
 onready var VP = get_viewport_rect().size
@@ -51,7 +51,7 @@ func _physics_process(delta):
 		# move the bullet forward
 		b.position.y -= 25
 		# show the bullet onscreen
-		get_node("/root/Games/Bullets").add_child(b)
+		get_node("/root/Games/Bullets").fire(b)
 	
 	if Input.is_action_pressed("Left"):
 		velocity.x -= acceleration

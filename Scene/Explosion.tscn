@@ -97,5 +97,5 @@ script = ExtResource( 2 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 17 )
-frame = 8
+speed_scale = 2.75
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
