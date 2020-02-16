@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var velocity = Vector2(0, 0)
 export var min_speed = 100
-export var max_speed = 600
+export var max_speed = 500
 export var damage = 50
 
 onready var Explosion = load("res://Scene/Explosion.tscn")
@@ -28,7 +28,8 @@ func _physics_process(delta):
 	for body in collisions:
 		
 		# this if statement ensures there's only one explosion
-		if body.get_parent().name == "Player":
+		# NOTE: Player has no parent, so just call name
+		if body.name == "Player":
 			
 			var explosion = Explosion.instance()
 			# explosion will happen where the bullet is

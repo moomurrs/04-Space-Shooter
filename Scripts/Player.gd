@@ -12,6 +12,8 @@ onready var VP = get_viewport_rect().size
 # make an instance of a bullet
 onready var Bullet_G = load("res://Scene/Bullet_G.tscn")
 
+
+onready var sprite = $Sprite
 # variable signals to be emitted
 signal health_changed
 signal score_changed
@@ -29,7 +31,10 @@ func change_score(s):
 	emit_signal("score_changed")
 
 func die():
+	
 	queue_free()
+	var End = load("res://Scene/End.tscn")
+	get_tree().change_scene("res://Scene/End.tscn")
 	
 	
 # a vector variable to hold x and y coordinates
@@ -54,6 +59,7 @@ func _physics_process(delta):
 		get_node("/root/Games/Bullets").fire(b)
 	
 	if Input.is_action_pressed("Left"):
+		
 		velocity.x -= acceleration
 	if Input.is_action_pressed("Right"):
 		velocity.x += acceleration
@@ -61,7 +67,7 @@ func _physics_process(delta):
 		velocity.y -= acceleration
 	if Input.is_action_pressed("Down"):
 		velocity.y += acceleration
-	
+		
 	# create an invisible wall that the 
 	# player cannot pass on the left/right
 	if position.x < margin:
