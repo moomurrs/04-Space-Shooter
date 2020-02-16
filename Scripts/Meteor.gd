@@ -26,21 +26,26 @@ func _physics_process(delta):
 	var collisions = get_colliding_bodies()
 	# iterate of the list of collisions
 	for body in collisions:
-		var explosion = Explosion.instance()
-		# explosion will happen where the bullet is
-		explosion.position = position
-		# play the explosion animation
-		explosion.get_node("Sprite").playing = true
-		# explosion instances will be inside the Explosions container
-		get_node("/root/Games/Explosions").add_child(explosion)
-		# NOTE: the explosion automatically deletes itself
-		# if a meteor collided with the Player, reduce health
+		
+		# this if statement ensures there's only one explosion
+		if body.get_parent().name == "Player":
+			
+			var explosion = Explosion.instance()
+			# explosion will happen where the bullet is
+			explosion.position = position
+			# play the explosion animation
+			explosion.get_node("Sprite").playing = true
+			# explosion instances will be inside the Explosions container
+			get_node("/root/Games/Explosions").add_child(explosion)
+			# NOTE: the explosion automatically deletes itself
+			# if a meteor collided with the Player, reduce health
+		
 		if body.name == "Player":
 			body.change_health(-damage)
 		queue_free()
 	
 	# if the meteor is well past the borders, delete it
-	if position.y > get_viewport_rect().size.y + 50:
+	if position.y > get_viewport_rect().size.y + 200:
 		queue_free()
 
 func _integrate_forces(state):
