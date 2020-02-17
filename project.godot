@@ -19,6 +19,10 @@ config/name="04- Space- Shooter"
 run/main_scene="res://Scene/Games.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalNode="*res://Scripts/GlobalNode.gd"
+
 [display]
 
 window/size/height=728

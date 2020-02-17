@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/OstrichSans-Heavy.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/End.gd" type="Script" id=2]
+[ext_resource path="res://Assets/game_over.wav" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
 [node name="End" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 2.78943
@@ -17,13 +24,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Message" type="Label" parent="."]
 margin_left = 337.531
-margin_top = 323.583
+margin_top = 283.52
 margin_right = 695.531
-margin_bottom = 391.583
+margin_bottom = 351.52
 custom_fonts/font = SubResource( 1 )
 text = "Game Over!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Score" type="Label" parent="."]
+margin_left = 412.122
+margin_top = 388.152
+margin_right = 581.122
+margin_bottom = 415.152
+custom_fonts/font = SubResource( 2 )
+text = "Final Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

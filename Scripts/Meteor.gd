@@ -48,7 +48,8 @@ func _physics_process(delta):
 	# if the meteor is well past the borders, delete it
 	if position.y > get_viewport_rect().size.y + 200:
 		queue_free()
-
+func die():
+	queue_free()
 func _integrate_forces(state):
 	# set a constant speed for the meteor
 	#state.set_linear_velocity(velocity)

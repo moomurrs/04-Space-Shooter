@@ -11,9 +11,12 @@ func _on_Player_health_changed():
 	# Health label is a child of this Node script,
 	# so use "$" to address its children
 	$Health.text = "Health: " + str(h)
+	$Sound.play()
 
 # when emitted from Player.gd,
 # this function updates the score
 func _on_Player_score_changed():
+	$Sound.play()
 	var s = get_node("/root/Games/Player").score
 	$Score.text = "Score: " + str(s)
+	GlobalNode.score = s
