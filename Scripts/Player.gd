@@ -22,6 +22,8 @@ func change_health(h):
 	emit_signal("health_changed")
 	if health <= 0:
 		die()
+	elif health <= 100:
+		$AnimatedSprite.play("damaged")
 
 func change_score(s):
 	score += s
@@ -30,7 +32,7 @@ func change_score(s):
 
 func die():
 	
-	queue_free()
+	self.hide()
 	var End = load("res://Scene/End.tscn")
 	get_tree().change_scene("res://Scene/End.tscn")
 	
@@ -44,8 +46,8 @@ func _ready():
 	emit_signal("health_changed")
 	emit_signal("score_changed")
 	
-	var player = $Sound
-	player.play()
+	#var player = $Sound
+	#player.play(0)
 
 # update player properties every 60 sec
 func _physics_process(delta):
@@ -58,6 +60,7 @@ func _physics_process(delta):
 		b.position.y -= 25
 		# show the bullet onscreen
 		get_node("/root/Games/Bullets").fire(b)
+		
 	
 	if Input.is_action_pressed("Left"):
 		$AnimatedSprite.play("left")
@@ -70,7 +73,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("Down"):
 		velocity.y += acceleration
 	
-	#$AnimatedSprite.play("idle")
+
 	# create an invisible wall that the 
 	# player cannot pass on the left/right
 	if position.x < margin:

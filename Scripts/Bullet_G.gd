@@ -5,6 +5,7 @@ export var speed = 500
 onready var Explosion = load("res://Scene/Explosion.tscn")
 onready var Player = get_node("/root/Games/Player")
 
+
 func _ready():
 	# bullets do need to have collision detection
 	contact_monitor = true
@@ -12,8 +13,6 @@ func _ready():
 	# constrain bullets to only report, at most, 4 simultaneously collisions 
 	set_max_contacts_reported(4)
 	
-	var player = $Sound
-	player.play()
 
 func _physics_process(delta):
 	# get a list of bodies that collided with bullet
@@ -31,14 +30,22 @@ func _physics_process(delta):
 		get_node("/root/Games/Explosions").add_child(explosion)
 		# NOTE: the explosion automatically deletes itself
 		
+		
 		# check if the bullet hits an enemy body
 		# if so, update the player score depending the enemy value
 		if body.get_parent().name == "Enemies":
+			#print("play sound")
+			
+			#get_node("Explosion").play(0)
+			#$Explosion.play(0)
 			Player.change_score(body.score)
+			body.die()
+		elif body.get_parent().name == "Meteors":
+			Player.change_score(5)
 			body.die()
 		# remove bullet because there is no point in letting it go further
 		queue_free()
-			
+		
 		
 	# if player bullet reaches top of screen, delete it
 	if position.y < -10:

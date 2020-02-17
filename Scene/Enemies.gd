@@ -1,7 +1,7 @@
 extends Node2D
 
 export var max_enemies = 5
-export var prob = .3
+export var prob = .4
 
 onready var Enemy1 = load("res://Scene/Enemy1.tscn")
 onready var Enemy2 = load("res://Scene/Enemy2.tscn")

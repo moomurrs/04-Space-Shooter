@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/corona_bk.png" type="Texture" id=1]
 [ext_resource path="res://Assets/player.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Assets/playerRight.png" type="Texture" id=8]
 [ext_resource path="res://Assets/playerLeft.png" type="Texture" id=9]
 [ext_resource path="res://Assets/background_music.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/explosion_sound.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scripts/GlobalNode.gd" type="Script" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -38,14 +40,14 @@ func _on_Timer_timeout():
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
-"loop": false,
-"name": "right",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": false,
 "name": "left",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "right",
 "speed": 0.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -99,6 +101,8 @@ shape = SubResource( 3 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource( 10 )
+autoplay = true
+area_mask = 0
 
 [node name="Meteors" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -141,6 +145,12 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="HUD"]
+stream = ExtResource( 11 )
+
+[node name="GlobalNode" type="Node" parent="."]
+script = ExtResource( 12 )
 [connection signal="timeout" from="Bullets/Timer" to="Bullets" method="_on_Timer_timeout"]
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
 [connection signal="score_changed" from="Player" to="HUD" method="_on_Player_score_changed"]
